@@ -1,6 +1,6 @@
 // #define FW_VERSION "v0.1.1"
 // const char* firmwareVersion = FW_VERSION;
-#define BLYNK_TEMPLATE_ID "TMPL6a1oz5dtv"
+#define BLYNK_TEMPLATE_ID "TMP--------"
 #define BLYNK_TEMPLATE_NAME "lolin mini"
 #define BLYNK_FIRMWARE_VERSION      "0.1.1"
 #define BLYNK_PRINT Serial
@@ -40,7 +40,7 @@ void setup()
   // Serial.println();
   // Serial.print("Device IP Address: ");
   // Serial.println(WiFi.localIP());
-  timer.setInterval(7000L, sendSensor);  // 5초마다 센서 읽기
+  timer.setInterval(7000L, sendSensor);  // 5 sec
 }
 
 void loop() {
