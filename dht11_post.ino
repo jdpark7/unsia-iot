@@ -2,20 +2,21 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-#define DHTPIN 0        // DHT11 데이터 핀
-#define DHTTYPE DHT11    // DHT11 센서 타입
+#define DHTPIN D4          // DHT11 data pin connected to D4 (GPIO2)
+#define DHTTYPE DHT11      // Define DHT sensor type
 
-const char* ssid = "YOUR_WIFI_SSID";
-const char* password = "YOUR_WIFI_PASSWORD";
-const char* serverUrl = "http://yoursubdomain.belajarhub.id/save_data.php";  // 자신의 서버 주소
+const char* ssid = "YOUR_WIFI_SSID";                // Your Wi-Fi SSID
+const char* password = "YOUR_WIFI_PASSWORD";        // Your Wi-Fi Password
+const char* serverUrl = "http://yourdomain.com/save_data.php"; // Server endpoint to receive data
 
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHTPIN, DHTTYPE);   // Create DHT sensor object
 
 void setup() {
-  Serial.begin(115200);
-  WiFi.begin(ssid, password);
-  dht.begin();
+  Serial.begin(115200);      // Start serial communication
+  WiFi.begin(ssid, password); // Connect to Wi-Fi
+  dht.begin();               // Initialize DHT sensor
 
+  // Wait until Wi-Fi is connected
   Serial.print("Connecting to WiFi");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -25,20 +26,25 @@ void setup() {
 }
 
 void loop() {
-  float humidity = dht.readHumidity();
-  float temperature = dht.readTemperature(); // 섭씨
+  float humidity = dht.readHumidity();       // Read humidity value
+  float temperature = dht.readTemperature(); // Read temperature in Celsius
 
+  // Check if reading is successful
   if (isnan(humidity) || isnan(temperature)) {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
 
+  // If Wi-Fi is still connected
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
-    http.begin(serverUrl);
+    http.begin(serverUrl);                          // Specify destination for POST
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
+    // Prepare POST data
     String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&device=wemos1";
+
+    // Send the POST request
     int httpResponseCode = http.POST(postData);
 
     Serial.print("POST Data: ");
@@ -46,10 +52,10 @@ void loop() {
     Serial.print("Response code: ");
     Serial.println(httpResponseCode);
 
-    http.end();
+    http.end();  // Close HTTP connection
   } else {
     Serial.println("WiFi Disconnected");
   }
 
-  delay(10000); // 10초마다 전송
+  delay(10000); // Wait 10 seconds before next reading
 }
