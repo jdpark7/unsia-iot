@@ -9,8 +9,8 @@
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
 
-const char* ssid = "U+Net3FD3";
-const char* password = "5D833323M@";
+const char* ssid = "Your SSID";
+const char* password = "Your Password";
 
 AsyncWebServer server(80);
 
