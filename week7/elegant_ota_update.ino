@@ -9,7 +9,7 @@
 
 #define DHTPIN 0
 #define DHTTYPE DHT11
-#define STUDENTID "123456"
+#define STUDENTID "Your ID"
 DHT dht(DHTPIN, DHTTYPE);
 
 const char* ssid = "Your SSID";
