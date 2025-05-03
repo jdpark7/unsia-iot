@@ -2,11 +2,11 @@
 #include <DHT.h>
 #include <ESP8266HTTPClient.h>
 
-const char* ssid = "U+Net3FD3";
-const char* password = "5D833323M@";
+const char* ssid = "Your SSID";
+const char* password = "Your Password";
 
 const char* host = "api.thingspeak.com";
-String apiKey = "UHO227M9UUTT667Y"; // ThingSpeak에서 복사
+String apiKey = "Your Api Key"; // get from ThingSpeak
 
 #define DHTPIN 0
 #define DHTTYPE DHT11
@@ -33,5 +33,5 @@ void loop() {
     int httpCode = http.GET();
     http.end();
   }
-  delay(15000); // ThingSpeak는 15초 간격 이상 전송 권장
+  delay(15000); // ThingSpeak recommends more than 15 sec
 }
