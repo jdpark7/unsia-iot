@@ -1,5 +1,5 @@
 #include <ESP8266WiFi.h>
-#include <WiFiClientSecure.h>  // WiFiClientSecure 사용
+#include <WiFiClientSecure.h>  // use WiFiClientSecure 
 #include <ESP8266HTTPClient.h>
 #include <DHT.h>
 
@@ -8,10 +8,10 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 #ifndef STASSID
-#define STASSID "U+Net3FD3"
-#define STAPSK "5D833323M@"
+#define STASSID "Your SSID"
+#define STAPSK "Your password"
 #endif
-#define STUDENTID "123456"
+#define STUDENTID "Your ID"
 
 const char* ssid = STASSID;
 const char* password = STAPSK;
@@ -20,7 +20,7 @@ const char* password = STAPSK;
 const char* server = "https://iot.learnina.org/dht.php";
 const char* stationid = STUDENTID;
 
-WiFiClientSecure client;  // HTTPS용 클라이언트
+WiFiClientSecure client;  // HTTPS client
 
 void setup() {
   Serial.begin(115200);
@@ -35,11 +35,10 @@ void setup() {
 
   dht.begin();
 
-  // ★ 서버 인증 무시 설정 (테스트용)
+  // ★ only for test
   client.setInsecure();  
-  // => 이 코드는 서버 SSL 인증서 확인을 생략합니다.
-  // => production에서는 fingerprint나 CA cert 등록하는 것이 안전합니다.
-}
+  // => skip ssl certificate
+  // => In production, use fingerprint or CA cert 
 
 void loop() {
   float temperature = dht.readTemperature();
@@ -52,7 +51,7 @@ void loop() {
   }
 
   if (WiFi.status() == WL_CONNECTED) {
-    HTTPClient https;  // HTTPClient 그대로 사용합니다. (client가 secure면 https 자동 처리)
+    HTTPClient https;  // use HTTPClient. (if client is secure, process https)
     String url = String(server) + "?stationid=" + stationid + 
                  "&temperature=" + String(temperature, 1) + 
                  "&humidity=" + String(humidity, 1);
@@ -60,9 +59,9 @@ void loop() {
     Serial.print("Requesting URL: ");
     Serial.println(url);
 
-    https.begin(client, url);  // WiFiClientSecure 사용
+    https.begin(client, url);  // use WiFiClientSecure 
 
-    int httpCode = https.GET(); // GET 요청
+    int httpCode = https.GET(); // GET request
     if (httpCode > 0) {
       String payload = https.getString();
       Serial.println(httpCode);
@@ -74,5 +73,5 @@ void loop() {
     https.end();
   }
 
-  delay(10000); // 10초마다 전송
+  delay(10000); // 10 sec
 }
