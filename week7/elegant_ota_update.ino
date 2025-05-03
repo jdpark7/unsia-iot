@@ -17,7 +17,7 @@ const char* password = "Your Password";
 const char* dataserver = "https://iot.learnina.org/dht.php";
 const char* stationid = STUDENTID;
 
-const uint8_t fingerprint[] = {0x5D,0x07,0x6E,0xB5,0x48,0xE8,0x81,0x1F,0x2A,0x42,0x2C,0x14,0x65,0x20,0x23,0xD3,0x1F,0x6C,0xAC,0x85};
+const uint8_t fingerprint[] = {----------------};
 
 AsyncWebServer server(80);
 // WiFiClientSecure client; 
