@@ -7,7 +7,7 @@
 
 const char* ssid = "YOUR_WIFI_SSID";                // Your Wi-Fi SSID
 const char* password = "YOUR_WIFI_PASSWORD";        // Your Wi-Fi Password
-const char* serverUrl = "http://yourdomain.com/save_data.php"; // Server endpoint to receive data
+const char* serverUrl = "https://yourdomain.com/save_data.php"; // Server endpoint to receive data
 
 DHT dht(DHTPIN, DHTTYPE);   // Create DHT sensor object
 
