@@ -42,7 +42,7 @@ void loop() {
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
     // Prepare POST data
-    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&studentid=student123";
+    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&apikey=abc123";
 
     // Send the POST request
     int httpResponseCode = http.POST(postData);
