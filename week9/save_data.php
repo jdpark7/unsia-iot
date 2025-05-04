@@ -17,12 +17,12 @@ try {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $temp = $_POST["temp"] ?? null;        // Read temperature value
     $hum = $_POST["hum"] ?? null;          // Read humidity value
-    $device = $_POST["device"] ?? "unknown"; // Read device ID (optional)
+    $studentid = $_POST["studentid"] ?? "unknown"; // Read student ID
 
     // If both temperature and humidity are received, insert into database
     if ($temp !== null && $hum !== null) {
         $stmt = $pdo->prepare("INSERT INTO sensor_data (device_id, temperature, humidity) VALUES (?, ?, ?)");
-        $stmt->execute([$device, $temp, $hum]);
+        $stmt->execute([$studentid, $temp, $hum]);
         echo "Data inserted successfully.";
     } else {
         echo "Missing data.";

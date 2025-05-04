@@ -2,7 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-#define DHTPIN 0          // DHT11 data pin connected to D4 (GPIO2)
+#define DHTPIN D4          // DHT11 data pin connected to D4 (GPIO2)
 #define DHTTYPE DHT11      // Define DHT sensor type
 
 const char* ssid = "YOUR_WIFI_SSID";                // Your Wi-Fi SSID
@@ -42,7 +42,7 @@ void loop() {
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
     // Prepare POST data
-    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&device=wemos1";
+    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&studentid=student123";
 
     // Send the POST request
     int httpResponseCode = http.POST(postData);

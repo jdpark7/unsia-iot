@@ -17,7 +17,7 @@ $stmt = $pdo->query("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 50"
 
 // Output as HTML table
 echo "<h2>Sensor Data (Latest 50)</h2>";
-echo "<table border='1'><tr><th>ID</th><th>Device</th><th>Temperature</th><th>Humidity</th><th>Timestamp</th></tr>";
+echo "<table border='1'><tr><th>ID</th><th>Student ID</th><th>Temperature</th><th>Humidity</th><th>Timestamp</th></tr>";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<tr>";
     echo "<td>{$row['id']}</td>";
