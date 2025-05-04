@@ -2,7 +2,7 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 
-#define DHTPIN D4          // DHT11 data pin connected to D4 (GPIO2)
+#define DHTPIN 0          // DHT11 data pin connected to D4 (GPIO2)
 #define DHTTYPE DHT11      // Define DHT sensor type
 
 const char* ssid = "YOUR_WIFI_SSID";                // Your Wi-Fi SSID
