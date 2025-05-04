@@ -15,14 +15,15 @@ try {
 
 // Handle POST request from IoT device
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $temp = $_POST["temp"] ?? null;        // Read temperature value
-    $hum = $_POST["hum"] ?? null;          // Read humidity value
-    $apikey = $_POST["apikey"] ?? "unknown"; // Read API key
+    $temp = $_POST["temp"] ?? null;               // Read temperature value
+    $hum = $_POST["hum"] ?? null;                 // Read humidity value
+    $apikey = $_POST["apikey"] ?? "unknown";      // Read API key
+    $device_id = $_POST["device_id"] ?? "unknown";// Read device ID
 
     // If both temperature and humidity are received, insert into database
     if ($temp !== null && $hum !== null) {
-        $stmt = $pdo->prepare("INSERT INTO sensor_data (apikey, temperature, humidity) VALUES (?, ?, ?)");
-        $stmt->execute([$apikey, $temp, $hum]);
+        $stmt = $pdo->prepare("INSERT INTO sensor_data (apikey, device_id, temperature, humidity) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$apikey, $device_id, $temp, $hum]);
         echo "Data inserted successfully.";
     } else {
         echo "Missing data.";

@@ -17,11 +17,12 @@ $stmt = $pdo->query("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 50"
 
 // Output as HTML table
 echo "<h2>Sensor Data (Latest 50)</h2>";
-echo "<table border='1'><tr><th>ID</th><th>API Key</th><th>Temperature</th><th>Humidity</th><th>Timestamp</th></tr>";
+echo "<table border='1'><tr><th>ID</th><th>API Key</th><th>Device ID</th><th>Temperature</th><th>Humidity</th><th>Timestamp</th></tr>";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<tr>";
     echo "<td>{$row['id']}</td>";
     echo "<td>{$row['apikey']}</td>";
+    echo "<td>{$row['device_id']}</td>";
     echo "<td>{$row['temperature']}</td>";
     echo "<td>{$row['humidity']}</td>";
     echo "<td>{$row['timestamp']}</td>";
