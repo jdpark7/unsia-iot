@@ -1,9 +1,9 @@
 <?php
 // Database connection configuration
 $host = "localhost";           // Database host
-$dbname = "unsia_db";          // Name of the user's database
-$user = "unsia";               // MariaDB username
-$pass = "your_password";       // MariaDB user password
+$dbname = "your_login_id_db";          // Name of the user's database
+$user = "your_login_id";               // MariaDB username
+$pass = "your_login_password";       // MariaDB user password
 
 // Try to establish a connection to the MariaDB server
 try {
