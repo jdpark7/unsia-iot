@@ -4,10 +4,12 @@
 
 #define DHTPIN 0        // DHT11 data pin
 #define DHTTYPE DHT11    // DHT11 type
+#define STUDENTID "your studnet id"
 
 const char* ssid = "Your SSID";
 const char* password = "Your Password";
 const char* serverUrl = "https://your-subdomain.belajarhub.id/save_data.php";  // your server address
+const char* stationid = STUDENTID;
 
 DHT dht(DHTPIN, DHTTYPE);
 WiFiClientSecure client;
@@ -40,7 +42,7 @@ void loop() {
     http.begin(client,serverUrl);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&apikey=123456&device_id=wemos1";
+    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&apikey=stationid&device_id=wemos mini";
     int httpResponseCode = http.POST(postData);
 
     Serial.print("POST Data: ");
