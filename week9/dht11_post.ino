@@ -9,7 +9,8 @@
 const char* ssid = "Your SSID";
 const char* password = "Your Password";
 const char* serverUrl = "https://your-subdomain.belajarhub.id/save_data.php";  // your server address
-const char* stationid = STUDENTID;
+const char* station_id = STUDENTID;
+const char* device_id = "wemos mini";
 
 DHT dht(DHTPIN, DHTTYPE);
 WiFiClientSecure client;
@@ -42,7 +43,7 @@ void loop() {
     http.begin(client,serverUrl);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&apikey=stationid&device_id=wemos mini";
+    String postData = "temp=" + String(temperature) + "&hum=" + String(humidity) + "&apikey="+station_id+"&device_id="+device_id;
     int httpResponseCode = http.POST(postData);
 
     Serial.print("POST Data: ");
