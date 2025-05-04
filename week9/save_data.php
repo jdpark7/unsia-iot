@@ -24,6 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($temp !== null && $hum !== null) {
         $stmt = $pdo->prepare("INSERT INTO sensor_data (apikey, device_id, temperature, humidity) VALUES (?, ?, ?, ?)");
         $stmt->execute([$apikey, $device_id, $temp, $hum]);
+        $countStmt = $pdo->query("SELECT COUNT(*) FROM sensor_data");
+        $totalRows = $countStmt->fetchColumn();
+        if ($totalRows > 100) {
+            $toDelete = $totalRows - 100;
+            $deleteStmt = $pdo->prepare("DELETE FROM sensor_data ORDER BY id ASC LIMIT ?");
+            $deleteStmt->bindValue(1, $toDelete, PDO::PARAM_INT);
+            $deleteStmt->execute();
+        }
         echo "Data inserted successfully.";
     } else {
         echo "Missing data.";
