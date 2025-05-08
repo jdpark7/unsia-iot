@@ -1,6 +1,6 @@
 <?php
 // Database connection using PDO
-$dsn = 'mysql:host=localhost;dbname=ypur-database;charset=utf8mb4';
+$dsn = 'mysql:host=localhost;dbname=your-database;charset=utf8mb4';
 $username = 'your_username';
 $password = 'your_password';
 
