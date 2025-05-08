@@ -13,7 +13,7 @@ try {
 }
 
 // Fetch the latest 20 records
-$stmt = $pdo->query("SELECT * FROM iot_data ORDER BY timestamp DESC LIMIT 20");
+$stmt = $pdo->query("SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 20");
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 // Prepare data for Chart.js
