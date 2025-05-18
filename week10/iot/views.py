@@ -15,7 +15,14 @@ def receive_sensor_data(request):
 
     if not is_valid_apikey(apikey, device_id):
         return Response({"error": "Invalid API key"}, status=status.HTTP_403_FORBIDDEN)
-
+    
+    MAX_RECORDS = 100
+    current_count = SensorData.objects.filter(device_id=request.data.get('device_id')).count()
+    
+    if current_count >= MAX_RECORDS:
+        oldest = SensorData.objects.filter(device_id=request.data.get('device_id')).order_by('timestamp')[:1]
+        oldest.delete()
+        
     serializer = SensorDataSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
