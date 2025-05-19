@@ -43,7 +43,6 @@ def device_data_view(request, device_id):
 def sensor_gauge_view(request, device_id):
     latest = SensorData.objects.filter(device_id=device_id).order_by('-timestamp').first()
 
-    # 눈금 각도 미리 계산 (10단위)
     temp_ticks = [{'label': i, 'angle': (i / 50) * 180} for i in range(0, 51, 5)]
     hum_ticks = [{'label': i, 'angle': (i / 100) * 180} for i in range(0, 101, 10)]
 
