@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sensor Data View</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h2>📊 Sensor Data for Device: <span th:text="${deviceId}"></span></h2>
+<canvas id="sensorChart" width="800" height="400"></canvas>
+
+<script th:inline="javascript">
+    const dataList = /*[[${dataList}]]*/ [];
+    const labels = dataList.map(d => new Date(d.timestamp).toLocaleString());
+    const tempData = dataList.map(d => d.temperature);
+    const humData = dataList.map(d => d.humidity);
+
+    const ctx = document.getElementById('sensorChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Temperature (°C)',
+                    data: tempData,
+                    borderWidth: 2,
+                    borderColor: 'red',
+                    fill: false
+                },
+                {
+                    label: 'Humidity (%)',
+                    data: humData,
+                    borderWidth: 2,
+                    borderColor: 'blue',
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: { display: true, title: { display: true, text: 'Timestamp' } },
+                y: { display: true, title: { display: true, text: 'Value' } }
+            }
+        }
+    });
+</script>
+</body>
+</html>

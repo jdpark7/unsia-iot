@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Sensor Data</title></head>
+<body>
+  <h2>Sensor Data for <span th:text="${deviceId}"></span></h2>
+  <ul>
+    <li th:each="data : ${sensorList}">
+      Temp: <span th:text="${data.temperature}"></span> |
+      Hum: <span th:text="${data.humidity}"></span> |
+      Time: <span th:text="${data.timestamp}"></span>
+    </li>
+  </ul>
+</body>
+</html>
+
