@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Sensor Data</title></head>
-<body>
-  <h2>Sensor Data for <span th:text="${deviceId}"></span></h2>
-  <ul>
-    <li th:each="data : ${sensorList}">
-      Temp: <span th:text="${data.temperature}"></span> |
-      Hum: <span th:text="${data.humidity}"></span> |
-      Time: <span th:text="${data.timestamp}"></span>
-    </li>
-  </ul>
+<head>
+  <meta charset="UTF-8">
+  <title>Sensor Data</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2 class="mb-4 text-primary">Sensor Data for <span th:text="${deviceId}"></span></h2>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center"
+          th:each="data : ${dataList}">
+        <div>
+          🌡️ Temp: <strong th:text="${data.temperature}">0.0</strong> °C |
+          💧 Hum: <strong th:text="${data.humidity}">0.0</strong> % |
+          🕒 Time: <small th:text="${data.timestamp}">yyyy-MM-dd HH:mm:ss</small>
+        </div>
+      </li>
+    </ul>
+  </div>
 </body>
 </html>
-
