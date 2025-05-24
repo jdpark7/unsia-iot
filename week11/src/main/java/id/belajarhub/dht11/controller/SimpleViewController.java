@@ -12,16 +12,16 @@ import id.belajarhub.dht11.model.SensorData;
 import id.belajarhub.dht11.repository.SensorDataRepository;
 
 @Controller
-public class WebViewController {
+public class SimpleViewController {
 
     @Autowired
     private SensorDataRepository repository;
 
-    @GetMapping("/sensor/{deviceId}")
+    @GetMapping("/sensors/{deviceId}")
     public String viewSensorData(@PathVariable String deviceId, Model model) {
         List<SensorData> dataList = repository.findByDeviceId(deviceId);
         model.addAttribute("deviceId", deviceId);
         model.addAttribute("dataList", dataList);
-        return "sensor"; // sensor.html 템플릿 렌더링
+        return "sensordata"; // sensordata.html 템플릿 렌더링
     }
 }
