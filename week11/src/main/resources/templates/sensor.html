@@ -6,44 +6,66 @@
 </head>
 <body>
 <h2>📊 Sensor Data for Device: <span th:text="${deviceId}"></span></h2>
-<canvas id="sensorChart" width="800" height="400"></canvas>
+<div>
+  <canvas id="tempChart" width="200" height="100" style="width: 200px; height: 100px;"></canvas>
+</div>
+<div>
+  <canvas id="humChart" width="200" height="100" style="width: 200px; height: 100px;"></canvas>
+</div>>
 
 <script th:inline="javascript">
     const dataList = /*[[${dataList}]]*/ [];
+
     const labels = dataList.map(d => new Date(d.timestamp).toLocaleString());
     const tempData = dataList.map(d => d.temperature);
     const humData = dataList.map(d => d.humidity);
 
-    const ctx = document.getElementById('sensorChart').getContext('2d');
-    const chart = new Chart(ctx, {
+    // Temperature Chart
+    const tempCtx = document.getElementById('tempChart').getContext('2d');
+    const tempChart = new Chart(tempCtx, {
         type: 'line',
         data: {
             labels: labels,
-            datasets: [
-                {
-                    label: 'Temperature (°C)',
-                    data: tempData,
-                    borderWidth: 2,
-                    borderColor: 'red',
-                    fill: false
-                },
-                {
-                    label: 'Humidity (%)',
-                    data: humData,
-                    borderWidth: 2,
-                    borderColor: 'blue',
-                    fill: false
-                }
-            ]
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: tempData,
+                borderColor: 'red',
+                borderWidth: 2,
+                fill: false
+            }]
         },
         options: {
-            responsive: true,
+            responsive: false,
             scales: {
                 x: { display: true, title: { display: true, text: 'Timestamp' } },
-                y: { display: true, title: { display: true, text: 'Value' } }
+                y: { display: true, title: { display: true, text: 'Temperature (°C)' }, min:0, max:50 }
+            }
+        }
+    });
+
+    // Humidity Chart
+    const humCtx = document.getElementById('humChart').getContext('2d');
+    const humChart = new Chart(humCtx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Humidity (%)',
+                data: humData,
+                borderColor: 'blue',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                x: { display: true, title: { display: true, text: 'Timestamp' } },
+                y: { display: true, title: { display: true, text: 'Humidity (%)' }, min:0, max:100}
             }
         }
     });
 </script>
+
 </body>
 </html>
