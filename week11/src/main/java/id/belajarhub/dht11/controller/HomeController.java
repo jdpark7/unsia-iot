@@ -1,25 +1,34 @@
 package id.belajarhub.dht11.controller;
 
-import id.belajarhub.dht11.service.HomeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import id.belajarhub.dht11.model.SensorData;
+import id.belajarhub.dht11.service.SensorDataService;
 
 @Controller
 public class HomeController {
+    private final SensorDataService service;
 
-    private final HomeService homeService;
-
-    @Autowired
-    public HomeController(HomeService homeService) {
-        this.homeService = homeService;
+    public HomeController(SensorDataService service) {
+        this.service = service;
     }
 
     @GetMapping("/")
     public String home(Model model) {
-        String message = homeService.getWelcomeMessage();
+        String message = "Welcome to UNSIA";
         model.addAttribute("message", message);
         return "home";  // templates/home.html 로 렌더링
     }
+    @GetMapping("/{deviceId}")
+    public String showData(@PathVariable String deviceId, Model model) {
+    List<SensorData> dataList = service.getByDeviceId(deviceId);
+    model.addAttribute("deviceId", deviceId);
+    model.addAttribute("dataList", dataList);
+    return "sensor";  // sensor.html 렌더링
+}
 }
