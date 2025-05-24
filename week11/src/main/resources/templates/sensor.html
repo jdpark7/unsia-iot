@@ -3,14 +3,27 @@
 <head>
     <title>Sensor Data View</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <style>
+    .chart-container {
+      display: flex;
+      justify-content: center; /* 가운데 정렬 */
+      gap: 20px; /* 차트 사이 간격 */
+    }
+    canvas {
+      width: 35% !important;   /* 부모 컨테이너 대비 40% 너비 */
+      height: auto !important; /* 높이 자동 조절 */
+      margin: 0 2%;            /* 좌우 여백 */
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
 <h2>📊 Sensor Data for Device: <span th:text="${deviceId}"></span></h2>
 <div>
-  <canvas id="tempChart" width="200" height="100" style="width: 200px; height: 100px;"></canvas>
-</div>
-<div>
-  <canvas id="humChart" width="200" height="100" style="width: 200px; height: 100px;"></canvas>
+  <div class="chart-container">
+        <canvas id="tempChart" ></canvas>
+        <canvas id="humChart" ></canvas>
+    </div>
 </div>>
 
 <script th:inline="javascript">
@@ -69,4 +82,5 @@
 
 </body>
 </html>
+
 
