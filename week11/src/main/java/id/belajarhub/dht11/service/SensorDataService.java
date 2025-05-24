@@ -1,10 +1,14 @@
 package id.belajarhub.dht11.service;
 
-import id.belajarhub.dht11.model.SensorData;
-import id.belajarhub.dht11.repository.SensorDataRepository;
+import java.util.List;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import id.belajarhub.dht11.model.SensorData;
+import id.belajarhub.dht11.repository.SensorDataRepository;
 
 @Service
 public class SensorDataService {
@@ -19,6 +23,7 @@ public class SensorDataService {
     }
 
     public List<SensorData> getByDeviceId(String deviceId) {
-        return repository.findByDeviceId(deviceId);
+       Pageable limit = PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "timestamp"));
+       return repository.findByDeviceIdOrderByTimestampDesc(deviceId, limit);
     }
 }
