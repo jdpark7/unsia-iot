@@ -29,6 +29,6 @@ public class HomeController {
     List<SensorData> dataList = service.getByDeviceId(deviceId);
     model.addAttribute("deviceId", deviceId);
     model.addAttribute("dataList", dataList);
-    return "sensorchart";  // sensor.html 렌더링
+    return "sensorchart";  // sensorchart.html rendering
 }
 }
