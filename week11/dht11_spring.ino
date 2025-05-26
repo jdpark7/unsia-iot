@@ -5,10 +5,10 @@
 #define DHTPIN 0        
 #define DHTTYPE DHT11    
 
-const char* ssid = "U+Net3FD3";
-const char* password = "5D833323M@";
+const char* ssid = "your ssid";
+const char* password = "your-password";
 //const char* serverUrl = "https://localhost:8080/api/sensors";
-const char* serverUrl = "https://unsia.belajarhub.id/spring/api/sensors";  
+const char* serverUrl = "https://your-domain.belajarhub.id/spring/api/sensors";  
 const char* api_key = "abc123";
 const char* deviceId = "device01";
 
