@@ -1,0 +1,297 @@
+[
+    {
+        "id": "c8a0a75703708a17",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "599740b7.efde9",
+        "type": "http response",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 820,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1618a829.76f638",
+        "type": "json",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 810,
+        "y": 520,
+        "wires": [
+            [
+                "d0089cc7.d25ac"
+            ]
+        ]
+    },
+    {
+        "id": "c7410fa2.1c2fa",
+        "type": "debug",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d0089cc7.d25ac",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "JSON or URL Encoded",
+        "func": "var msg1 = { payload: msg.payload.temperature };\nvar msg2 = { payload: msg.payload.humidity };\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 520,
+        "wires": [
+            [
+                "1c8f9093.8bc2bf"
+            ],
+            [
+                "a5bd2706.54e108"
+            ]
+        ]
+    },
+    {
+        "id": "5d9ab0d2.66b92",
+        "type": "http in",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "url": "update-sensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 600,
+        "y": 451,
+        "wires": [
+            [
+                "599740b7.efde9",
+                "c7410fa2.1c2fa",
+                "1618a829.76f638"
+            ]
+        ]
+    },
+    {
+        "id": "1c8f9093.8bc2bf",
+        "type": "ui_gauge",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1270,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "a5bd2706.54e108",
+        "type": "ui_gauge",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#0080ff",
+            "#0062c4",
+            "#002f5e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1260,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7e43813126a80ef6",
+        "type": "inject",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"temperature\":25,\"humidity\":80}",
+        "payloadType": "json",
+        "x": 550,
+        "y": 260,
+        "wires": [
+            [
+                "0876717a450ab076"
+            ]
+        ]
+    },
+    {
+        "id": "e04bf9260cb99808",
+        "type": "http request",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/update-sensor",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1030,
+        "y": 260,
+        "wires": [
+            [
+                "3e8781e82c6b69c6"
+            ]
+        ]
+    },
+    {
+        "id": "3e8781e82c6b69c6",
+        "type": "debug",
+        "z": "c8a0a75703708a17",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "0876717a450ab076",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "function 1",
+        "func": "msg.headers={};\nmsg.headers['content-type'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 260,
+        "wires": [
+            [
+                "e04bf9260cb99808"
+            ]
+        ]
+    },
+    {
+        "id": "566e513a0a195936",
+        "type": "inject",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.temperature",
+                "v": "$round(25+$random()*5,1)",
+                "vt": "jsonata"
+            },
+            {
+                "p": "payload.humidity",
+                "v": "$round(25+$random()*50,1)",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 550,
+        "y": 160,
+        "wires": [
+            [
+                "0876717a450ab076"
+            ]
+        ]
+    },
+    {
+        "id": "2b7ac01b.fc984",
+        "type": "ui_group",
+        "name": "SENSORS",
+        "tab": "99ab8dc5.f435c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "99ab8dc5.f435c",
+        "type": "ui_tab",
+        "name": "HTTP",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
