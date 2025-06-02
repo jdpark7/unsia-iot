@@ -1,0 +1,381 @@
+[
+    {
+        "id": "c8a0a75703708a17",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "599740b7.efde9",
+        "type": "http response",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 480,
+        "y": 369,
+        "wires": []
+    },
+    {
+        "id": "d0089cc7.d25ac",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "Temp and Humidity",
+        "func": "var msg1 = { payload: msg.payload.temperature };\nvar msg2 = { payload: msg.payload.humidity };\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 720,
+        "wires": [
+            [
+                "1c8f9093.8bc2bf"
+            ],
+            [
+                "a5bd2706.54e108"
+            ]
+        ]
+    },
+    {
+        "id": "5d9ab0d2.66b92",
+        "type": "http in",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "url": "update-sensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 400,
+        "wires": [
+            [
+                "599740b7.efde9",
+                "b27cc3bd2bcf6f1c"
+            ]
+        ]
+    },
+    {
+        "id": "1c8f9093.8bc2bf",
+        "type": "ui_gauge",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1030,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "a5bd2706.54e108",
+        "type": "ui_gauge",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#0080ff",
+            "#0062c4",
+            "#002f5e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 1040,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "e04bf9260cb99808",
+        "type": "http request",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:1880/update-sensor",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 690,
+        "y": 240,
+        "wires": [
+            [
+                "3e8781e82c6b69c6"
+            ]
+        ]
+    },
+    {
+        "id": "3e8781e82c6b69c6",
+        "type": "debug",
+        "z": "c8a0a75703708a17",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "0876717a450ab076",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "header",
+        "func": "msg.headers={};\nmsg.headers['content-type'] = 'application/json';\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 240,
+        "wires": [
+            [
+                "e04bf9260cb99808"
+            ]
+        ]
+    },
+    {
+        "id": "566e513a0a195936",
+        "type": "inject",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.temperature",
+                "v": "$round(25+$random()*5,1)",
+                "vt": "jsonata"
+            },
+            {
+                "p": "payload.humidity",
+                "v": "$round(25+$random()*50,1)",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "0876717a450ab076"
+            ]
+        ]
+    },
+    {
+        "id": "b27cc3bd2bcf6f1c",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "Insert",
+        "func": "msg.topic = \"INSERT INTO sensor_data (temperature, humidity) VALUES (?, ?)\";\nmsg.payload = [msg.payload.temperature, msg.payload.humidity];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 449,
+        "wires": [
+            [
+                "642319354878b50a"
+            ]
+        ]
+    },
+    {
+        "id": "da0f481bde76b2c0",
+        "type": "inject",
+        "z": "c8a0a75703708a17",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 580,
+        "wires": [
+            [
+                "a4cfab605b5eb7c1"
+            ]
+        ]
+    },
+    {
+        "id": "a4cfab605b5eb7c1",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "select *",
+        "func": "msg.topic=`SELECT * FROM sensor_data ORDER BY timestamp DESC LIMIT 1`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 580,
+        "wires": [
+            [
+                "e5e47f023c48b558"
+            ]
+        ]
+    },
+    {
+        "id": "e5e47f023c48b558",
+        "type": "mysql",
+        "z": "c8a0a75703708a17",
+        "mydb": "bceed1e54606b872",
+        "name": "",
+        "x": 630,
+        "y": 580,
+        "wires": [
+            [
+                "a5f70555e2630375"
+            ]
+        ]
+    },
+    {
+        "id": "642319354878b50a",
+        "type": "mysql",
+        "z": "c8a0a75703708a17",
+        "mydb": "bceed1e54606b872",
+        "name": "",
+        "x": 670,
+        "y": 449,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a51923dc8d270c79",
+        "type": "debug",
+        "z": "c8a0a75703708a17",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "a5f70555e2630375",
+        "type": "function",
+        "z": "c8a0a75703708a17",
+        "name": "payload[0]",
+        "func": "if (Array.isArray(msg.payload) && msg.payload.length > 0) {\n    msg.payload = msg.payload[0];  \n} else {\n    msg.payload = { error: \"No data found\" };\n}\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 580,
+        "wires": [
+            [
+                "a51923dc8d270c79",
+                "d0089cc7.d25ac"
+            ]
+        ]
+    },
+    {
+        "id": "2b7ac01b.fc984",
+        "type": "ui_group",
+        "name": "SENSORS",
+        "tab": "99ab8dc5.f435c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "bceed1e54606b872",
+        "type": "MySQLdatabase",
+        "name": "Mysql config",
+        "host": "172.31.98.102",
+        "port": "3306",
+        "db": "node",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "99ab8dc5.f435c",
+        "type": "ui_tab",
+        "name": "HTTP",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
