@@ -1,6 +1,6 @@
 [
     {
-        "id": "c8a0a75703708a17",
+        "id": "c19ce083945af90e",
         "type": "tab",
         "label": "Flow 1",
         "disabled": false,
@@ -10,153 +10,113 @@
     {
         "id": "599740b7.efde9",
         "type": "http response",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
         "statusCode": "200",
         "headers": {},
-        "x": 820,
-        "y": 400,
+        "x": 520,
+        "y": 320,
         "wires": []
-    },
-    {
-        "id": "1618a829.76f638",
-        "type": "json",
-        "z": "c8a0a75703708a17",
-        "name": "",
-        "property": "payload",
-        "action": "obj",
-        "pretty": true,
-        "x": 810,
-        "y": 520,
-        "wires": [
-            [
-                "d0089cc7.d25ac"
-            ]
-        ]
     },
     {
         "id": "c7410fa2.1c2fa",
         "type": "debug",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 830,
-        "y": 460,
+        "complete": "false",
+        "x": 510,
+        "y": 380,
         "wires": []
     },
     {
         "id": "d0089cc7.d25ac",
         "type": "function",
-        "z": "c8a0a75703708a17",
-        "name": "JSON or URL Encoded",
-        "func": "var msg1 = { payload: msg.payload.temperature };\nvar msg2 = { payload: msg.payload.humidity };\nreturn [msg1, msg2];",
+        "z": "c19ce083945af90e",
+        "name": "function",
+        "func": "let msg1 = { payload: msg.payload.temperature };\nlet msg2 = { payload: msg.payload.humidity };\n\nreturn [msg1, msg2];",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1010,
-        "y": 520,
+        "x": 520,
+        "y": 460,
         "wires": [
             [
-                "1c8f9093.8bc2bf"
+                "36be8206e6423dc5"
             ],
             [
-                "a5bd2706.54e108"
+                "1350b524fc3f6392"
             ]
         ]
     },
     {
         "id": "5d9ab0d2.66b92",
         "type": "http in",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
-        "url": "update-sensor",
+        "url": "/update-sensor",
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 600,
-        "y": 451,
+        "x": 280,
+        "y": 380,
         "wires": [
             [
                 "599740b7.efde9",
                 "c7410fa2.1c2fa",
-                "1618a829.76f638"
+                "d0089cc7.d25ac"
             ]
         ]
     },
     {
-        "id": "1c8f9093.8bc2bf",
-        "type": "ui_gauge",
-        "z": "c8a0a75703708a17",
+        "id": "7ebcc4f10b3ea818",
+        "type": "http request",
+        "z": "c19ce083945af90e",
         "name": "",
-        "group": "2b7ac01b.fc984",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Temperature",
-        "label": "ºC",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "50",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8000/monitoring/api/data/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
         ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1270,
-        "y": 500,
-        "wires": []
+        "x": 1550,
+        "y": 1020,
+        "wires": [
+            [
+                "20f2699d4e2fdc05"
+            ]
+        ]
     },
     {
-        "id": "a5bd2706.54e108",
-        "type": "ui_gauge",
-        "z": "c8a0a75703708a17",
-        "name": "",
-        "group": "2b7ac01b.fc984",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Humidity",
-        "label": "%",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "100",
-        "colors": [
-            "#0080ff",
-            "#0062c4",
-            "#002f5e"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 1260,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "7e43813126a80ef6",
+        "id": "baa9bbc1cf030ad9",
         "type": "inject",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
         "props": [
             {
                 "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
             }
         ],
         "repeat": "",
@@ -164,20 +124,56 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"temperature\":25,\"humidity\":80}",
-        "payloadType": "json",
-        "x": 550,
-        "y": 260,
+        "payload": "",
+        "payloadType": "date",
+        "x": 1040,
+        "y": 1020,
         "wires": [
             [
-                "0876717a450ab076"
+                "7eba33bd987c6dda"
             ]
         ]
     },
     {
-        "id": "e04bf9260cb99808",
+        "id": "7eba33bd987c6dda",
+        "type": "function",
+        "z": "c19ce083945af90e",
+        "name": "function 1",
+        "func": "msg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nmsg.payload = {\n    \"api_key\": \"tPmAT5Ab3j7F9\",\n    \"sensor\": \"BME280\",\n    \"value1\": \"24.25\",\n    \"value2\": \"49.54\",\n    \"value3\": \"1005.14\"\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1280,
+        "y": 1020,
+        "wires": [
+            [
+                "7ebcc4f10b3ea818"
+            ]
+        ]
+    },
+    {
+        "id": "20f2699d4e2fdc05",
+        "type": "debug",
+        "z": "c19ce083945af90e",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "70e051dd94eacce7",
         "type": "http request",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
         "method": "POST",
         "ret": "txt",
@@ -197,35 +193,36 @@
                 "valueValue": ""
             }
         ],
-        "x": 1030,
-        "y": 260,
+        "x": 790,
+        "y": 200,
         "wires": [
             [
-                "3e8781e82c6b69c6"
+                "e9f2fffeecfc0443"
             ]
         ]
     },
     {
-        "id": "3e8781e82c6b69c6",
+        "id": "e9f2fffeecfc0443",
         "type": "debug",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "debug 1",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1280,
-        "y": 260,
+        "x": 1040,
+        "y": 200,
         "wires": []
     },
     {
-        "id": "0876717a450ab076",
+        "id": "c8f622bdad262ab0",
         "type": "function",
-        "z": "c8a0a75703708a17",
-        "name": "function 1",
+        "z": "c19ce083945af90e",
+        "name": "Header",
         "func": "msg.headers={};\nmsg.headers['content-type'] = 'application/json';\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
@@ -233,18 +230,18 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 800,
-        "y": 260,
+        "x": 520,
+        "y": 200,
         "wires": [
             [
-                "e04bf9260cb99808"
+                "70e051dd94eacce7"
             ]
         ]
     },
     {
-        "id": "566e513a0a195936",
+        "id": "c8aec640b36cb34b",
         "type": "inject",
-        "z": "c8a0a75703708a17",
+        "z": "c19ce083945af90e",
         "name": "",
         "props": [
             {
@@ -267,30 +264,86 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 550,
-        "y": 160,
+        "x": 270,
+        "y": 200,
         "wires": [
             [
-                "0876717a450ab076"
+                "c8f622bdad262ab0"
             ]
         ]
     },
     {
-        "id": "2b7ac01b.fc984",
-        "type": "ui_group",
-        "name": "SENSORS",
-        "tab": "99ab8dc5.f435c",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false
+        "id": "36be8206e6423dc5",
+        "type": "ui_gauge",
+        "z": "c19ce083945af90e",
+        "name": "",
+        "group": "5ba8b1174a881f71",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 810,
+        "y": 420,
+        "wires": []
     },
     {
-        "id": "99ab8dc5.f435c",
-        "type": "ui_tab",
-        "name": "HTTP",
-        "icon": "dashboard",
+        "id": "1350b524fc3f6392",
+        "type": "ui_gauge",
+        "z": "c19ce083945af90e",
+        "name": "",
+        "group": "5ba8b1174a881f71",
         "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "units",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 800,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "5ba8b1174a881f71",
+        "type": "ui_group",
+        "name": "Sensor",
+        "tab": "cf571c60550dc6da",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cf571c60550dc6da",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
         "disabled": false,
         "hidden": false
     }
