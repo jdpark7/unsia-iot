@@ -1,0 +1,161 @@
+[
+    {
+        "id": "35e56c01582908f3",
+        "type": "tab",
+        "label": "Sheet 1",
+        "disabled": false
+    },
+    {
+        "id": "435881239fb0e720",
+        "type": "inject",
+        "z": "35e56c01582908f3",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "2a32547fbe9f67a9"
+            ]
+        ]
+    },
+    {
+        "id": "2a32547fbe9f67a9",
+        "type": "function",
+        "z": "35e56c01582908f3",
+        "name": "function 2",
+        "func": "msg.payload = {\n    temperature: 24.5,\n    humidity: 58.1\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 200,
+        "wires": [
+            [
+                "bd23783bf97914fd"
+            ]
+        ]
+    },
+    {
+        "id": "bd23783bf97914fd",
+        "type": "coap request",
+        "z": "35e56c01582908f3",
+        "method": "POST",
+        "confirmable": true,
+        "observe": false,
+        "multicast": false,
+        "multicastTimeout": 20000,
+        "url": "coap://172.31.98.102:5683/sensor/data",
+        "content-format": "application/json",
+        "raw-buffer": false,
+        "name": "",
+        "x": 790,
+        "y": 200,
+        "wires": [
+            [
+                "57f0746ac2623b5f"
+            ]
+        ]
+    },
+    {
+        "id": "f99fe610bc7b4b61",
+        "type": "coap in",
+        "z": "35e56c01582908f3",
+        "method": "POST",
+        "name": "",
+        "server": "ab3060f4c7e96482",
+        "url": "/sensor/data",
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "637d3b65f78e4ba2",
+                "7ccce4e28564a859"
+            ]
+        ]
+    },
+    {
+        "id": "57f0746ac2623b5f",
+        "type": "debug",
+        "z": "35e56c01582908f3",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "256e02f4c21df632",
+        "type": "debug",
+        "z": "35e56c01582908f3",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "637d3b65f78e4ba2",
+        "type": "json",
+        "z": "35e56c01582908f3",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "256e02f4c21df632"
+            ]
+        ]
+    },
+    {
+        "id": "7ccce4e28564a859",
+        "type": "coap response",
+        "z": "35e56c01582908f3",
+        "name": "",
+        "statusCode": "200",
+        "contentFormat": "text/plain",
+        "x": 550,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ab3060f4c7e96482",
+        "type": "coap-server",
+        "name": "Hello CoAP Server",
+        "port": "5683",
+        "ipv6": false
+    }
+]
