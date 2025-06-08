@@ -1,0 +1,160 @@
+[
+    {
+        "id": "88e7a36b20a54df8",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "56d94ee87c403d24",
+        "type": "mqtt in",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "topic": "unsia/iot",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "7317beeb4ba886a1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 740,
+        "y": 160,
+        "wires": [
+            [
+                "afee69f0fe7dcd07"
+            ]
+        ]
+    },
+    {
+        "id": "716dafe97e4b51c5",
+        "type": "mqtt out",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "topic": "unsia/iot",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7317beeb4ba886a1",
+        "x": 560,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "063852044e47ab50",
+        "type": "inject",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "0d36d9336fa9b887"
+            ]
+        ]
+    },
+    {
+        "id": "afee69f0fe7dcd07",
+        "type": "debug",
+        "z": "88e7a36b20a54df8",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0d36d9336fa9b887",
+        "type": "function",
+        "z": "88e7a36b20a54df8",
+        "name": "function 3",
+        "func": "msg.payload={\"temperature\":25.8, \"humidity\":60}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "716dafe97e4b51c5"
+            ]
+        ]
+    },
+    {
+        "id": "7317beeb4ba886a1",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "iot.unsia.local",
+        "port": "8883",
+        "tls": "71515ee3e3a3a865",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "5",
+        "keepalive": "120",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "71515ee3e3a3a865",
+        "type": "tls-config",
+        "name": "",
+        "cert": "/home/username/.node-red/certs/cert.pem",
+        "key": "/home/username/.node-red/certs/key.pem",
+        "ca": "/home/username/.node-red/certs/rootCA.pem",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "iot.unsia.local",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
