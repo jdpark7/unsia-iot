@@ -9,7 +9,7 @@ const char* password = "your-password";
 
 // MQTT 
 const char* mqtt_server = "iot.unsia.local";
-const int mqtt_port = 8883;
+const int mqtt_port = 1883;
 const char* mqtt_user = "unsia";
 const char* mqtt_pass = "unsia*01";
 const char* mqtt_topic = "unsia/iot";
