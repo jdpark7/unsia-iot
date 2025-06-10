@@ -2,7 +2,6 @@
 #include <WiFiClientSecure.h>
 #include <PubSubClient.h>
 #include <DHT.h>
-#include <LittleFS.h>
 
 // Wi-Fi setting
 const char* ssid = "your-ssid";
@@ -19,7 +18,6 @@ const char* mqtt_topic = "unsia/unsia/iot"; // Or username/any-topic for you onl
 #define DHTPIN 0            // pin number
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
-#define CA_CERT_FILE "/rootCA_der.h"
 
 #include "rootCA_der.h"  // xxd -i
 
@@ -55,12 +53,11 @@ void reconnect() {
 
 
 void setup() {
-  char *ca_cert = nullptr;
+
   Serial.begin(115200);
   dht.begin();
   setup_wifi();
 
- 
   secureClient.setTrustAnchors(&cert);
   secureClient.setBufferSizes(512, 512); 
   secureClient.setInsecure();
