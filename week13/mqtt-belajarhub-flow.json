@@ -1,0 +1,161 @@
+[
+    {
+        "id": "88e7a36b20a54df8",
+        "type": "tab",
+        "label": "Flow 5",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "56d94ee87c403d24",
+        "type": "mqtt in",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "topic": "unsia/unsia/iot",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "502054857abd1a73",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 750,
+        "y": 160,
+        "wires": [
+            [
+                "afee69f0fe7dcd07"
+            ]
+        ]
+    },
+    {
+        "id": "716dafe97e4b51c5",
+        "type": "mqtt out",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "topic": "unsia/unsia/iot",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "application/json",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "502054857abd1a73",
+        "x": 580,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "063852044e47ab50",
+        "type": "inject",
+        "z": "88e7a36b20a54df8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "0d36d9336fa9b887"
+            ]
+        ]
+    },
+    {
+        "id": "afee69f0fe7dcd07",
+        "type": "debug",
+        "z": "88e7a36b20a54df8",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0d36d9336fa9b887",
+        "type": "function",
+        "z": "88e7a36b20a54df8",
+        "name": "function 3",
+        "func": "msg.payload={\"temperature\":25.8, \"humidity\":60}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "716dafe97e4b51c5"
+            ]
+        ]
+    },
+    {
+        "id": "502054857abd1a73",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mqtt.belajarhub.id",
+        "port": "8883",
+        "tls": "051cc56646df2039",
+        "clientid": "unsia",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "180",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "051cc56646df2039",
+        "type": "tls-config",
+        "name": "belajarhub",
+        "cert": "/etc/mosquitto/certs/cert.pem",
+        "key": "/etc/mosquitto/certs/privkey.pem",
+        "ca": "/etc/mosquitto/certs/fullchain.pem",
+        "certname": "cert.pem",
+        "keyname": "privkey.pem",
+        "caname": "root_CA.pem",
+        "servername": "mqtt.belajarhub.id",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
