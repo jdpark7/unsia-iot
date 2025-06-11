@@ -1,0 +1,160 @@
+[
+    {
+        "id": "d03349e878358d8e",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0ef634c597b76054",
+        "type": "inject",
+        "z": "d03349e878358d8e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 180,
+        "wires": [
+            [
+                "7f496a672dc0e065"
+            ]
+        ]
+    },
+    {
+        "id": "7f496a672dc0e065",
+        "type": "function",
+        "z": "d03349e878358d8e",
+        "name": "function 4",
+        "func": "msg.payload={\"temperature\":25.8, \"humidity\":60}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 180,
+        "wires": [
+            [
+                "fc52b291296bc5c3"
+            ]
+        ]
+    },
+    {
+        "id": "fc52b291296bc5c3",
+        "type": "mqtt out",
+        "z": "d03349e878358d8e",
+        "name": "",
+        "topic": "unsia/iot",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7317beeb4ba886a1",
+        "x": 620,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fa164ffdd5ea5d9c",
+        "type": "mqtt in",
+        "z": "d03349e878358d8e",
+        "name": "",
+        "topic": "unsia/iot",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "7317beeb4ba886a1",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 820,
+        "y": 180,
+        "wires": [
+            [
+                "ee162ddd12e92a37"
+            ]
+        ]
+    },
+    {
+        "id": "ee162ddd12e92a37",
+        "type": "debug",
+        "z": "d03349e878358d8e",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7317beeb4ba886a1",
+        "type": "mqtt-broker",
+        "name": "mqtt",
+        "broker": "mqtts://192.168.219.113",
+        "port": "8883",
+        "tls": "71515ee3e3a3a865",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "3",
+        "keepalive": "120",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "71515ee3e3a3a865",
+        "type": "tls-config",
+        "name": "",
+        "cert": "C:\\mosquitto-config\\certs\\server.crt",
+        "key": "C:\\mosquitto-config\\certs\\server.key",
+        "ca": "C:\\mosquitto-config\\certs\\rootCA.pem",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "192.168.219.113",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    }
+]
