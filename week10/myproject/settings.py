@@ -23,9 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ar86!6f0twvz6+i^n8^kopt&q1y4_bhp9)(r@@jb7x+-65e*t2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+'yourdomain.belajarhub.id',
+'localhost',
+'127.0.0.1'
+]
 
 
 # Application definition
