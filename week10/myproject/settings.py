@@ -31,6 +31,9 @@ ALLOWED_HOSTS = [
 '127.0.0.1'
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://h20060.belajarhub.id",  # 정적 방식
+]
 
 # Application definition
 
