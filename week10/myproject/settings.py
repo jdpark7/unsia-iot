@@ -32,7 +32,7 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://h20060.belajarhub.id",  # 정적 방식
+    "https://yourdomain.belajarhub.id",  # 정적 방식
 ]
 
 # Application definition
